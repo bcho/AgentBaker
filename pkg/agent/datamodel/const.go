@@ -59,6 +59,8 @@ const (
 )
 
 const (
+	// DefaultEnableCSIProxyWindows determines if CSI proxy should be enabled by default for Windows nodes
+	DefaultEnableCSIProxyWindows = false
 	// DefaultWindowsSSHEnabled is the default windowsProfile.sshEnabled value
 	DefaultWindowsSSHEnabled = true
 )

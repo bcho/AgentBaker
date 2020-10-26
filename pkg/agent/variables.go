@@ -55,7 +55,7 @@ func getCustomDataVariables(config *NodeBootstrappingConfiguration) paramsMap {
 func getCSECommandVariables(config *NodeBootstrappingConfiguration) paramsMap {
 	cs := config.ContainerService
 	profile := config.AgentPoolProfile
-	return map[string]interface{}{
+	cseCommandVariables := map[string]interface{}{
 		"outBoundCmd":                     getOutBoundCmd(cs, config.CloudSpecConfig),
 		"tenantID":                        config.TenantID,
 		"subscriptionId":                  config.SubscriptionID,
@@ -82,7 +82,18 @@ func getCSECommandVariables(config *NodeBootstrappingConfiguration) paramsMap {
 		"configGPUDriverIfNeeded":         config.ConfigGPUDriverIfNeeded,
 		"enableGPUDevicePluginIfNeeded":   config.EnableGPUDevicePluginIfNeeded,
 		"enableDynamicKubelet":            config.EnableDynamicKubelet,
+		"enableTelemetry":                 cs.Properties.FeatureFlags.IsFeatureEnabled("EnableTelemetry"),
+		"apiVersionNetwork":               datamodel.APIVersionNetwork,
 	}
+
+	if cs.Properties.HasWindows() {
+		cseCommandVariables["windowsEnableCSIProxy"] = cs.Properties.WindowsProfile.IsCSIProxyEnabled()
+		cseCommandVariables["windowsProvisioningScriptsPackageURL"] = cs.Properties.WindowsProfile.ProvisioningScriptsPackageURL
+		cseCommandVariables["windowsPauseImageURL"] = cs.Properties.WindowsProfile.WindowsPauseImageURL
+		cseCommandVariables["alwaysPullWindowsPauseImage"] = strconv.FormatBool(cs.Properties.WindowsProfile.IsAlwaysPullWindowsPauseImage())
+	}
+
+	return cseCommandVariables
 }
 
 func useManagedIdentity(cs *datamodel.ContainerService) string {
