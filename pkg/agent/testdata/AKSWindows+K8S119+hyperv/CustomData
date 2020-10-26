@@ -77,7 +77,7 @@ $global:DockerVersion = "19.03.5"
 ## ContainerD Usage
 $global:ContainerRuntime = ""
 $global:DefaultContainerdRuntimeHandler = "process"
-$global:HypervRuntimeHandlers = ""
+$global:HypervRuntimeHandlers = "17763,19041"
 
 # To support newer Windows OS version, we need to support set ContainerRuntime,
 # HypervRuntimeHandlers and DefaultContainerdRuntimeHandler per agent pool but

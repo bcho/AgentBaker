@@ -349,6 +349,7 @@ func getContainerServiceFuncMap(config *NodeBootstrappingConfiguration) template
 				kubernetesWindowsAzureCniFunctionsPS1,
 				kubernetesWindowsHostsConfigAgentFunctionsPS1,
 				kubernetesWindowsOpenSSHFunctionPS1,
+				kubernetesWindowsHypervtemplatetoml,
 			}
 
 			// Create a buffer, new zip
