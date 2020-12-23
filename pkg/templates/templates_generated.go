@@ -4040,6 +4040,7 @@ write_files:
     {{GetVariableProperty "cloudInitData" "customSearchDomainsScript"}}
 {{end}}
 
+{{- /* genreate config content */ -}}
 {{if IsTLSBootstrapTokenEnabled}}
 - path: /var/lib/kubelet/bootstrap-kubeconfig
   permissions: "0644"

@@ -117,8 +117,6 @@ write_files:
     
 
 
-
-
 - path: /var/lib/kubelet/bootstrap-kubeconfig
   permissions: "0644"
   owner: root

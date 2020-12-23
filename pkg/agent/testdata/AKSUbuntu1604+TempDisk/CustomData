@@ -118,8 +118,6 @@ write_files:
     
 
 
-
-
 - path: /var/lib/kubelet/kubeconfig
   permissions: "0644"
   owner: root
