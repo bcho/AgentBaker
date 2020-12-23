@@ -1416,6 +1416,7 @@ type NodeBootstrappingConfiguration struct {
 	EnableKubeletConfigFile       bool
 	EnableNvidia                  bool
 	EnableACRTeleportPlugin       bool
+	EnableTLSBootstrapToken       bool
 	TeleportdPluginURL            string
 }
 
