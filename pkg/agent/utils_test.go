@@ -6,9 +6,10 @@ package agent
 import (
 	"testing"
 
-	"github.com/Azure/agentbaker/pkg/agent/datamodel"
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/google/go-cmp/cmp"
+
+	"github.com/Azure/agentbaker/pkg/agent/datamodel"
 )
 
 func TestGetKubeletConfigFileFromFlags(t *testing.T) {
@@ -213,6 +214,37 @@ func TestIsTLSBootstrapTokenEnabled(t *testing.T) {
 		actual := IsTLSBootstrapTokenEnabled(c.cs, c.profile, c.tlsBootstrapTokenToggleEnabled)
 		if actual != c.expected {
 			t.Errorf("%s: expected=%t, actual=%t", c.reason, c.expected, actual)
+		}
+	}
+}
+
+func TestGetTLSBootstrapTokenForKubeConfig(t *testing.T) {
+	cases := []struct {
+		profile  *datamodel.AgentPoolProfile
+		expected string
+		reason   string
+	}{
+		{
+			profile:  &datamodel.AgentPoolProfile{},
+			expected: "",
+			reason:   "TLS bootstrap token not set",
+		},
+		{
+			profile: &datamodel.AgentPoolProfile{
+				TLSBootstrapToken: &datamodel.TLSBootstrapToken{
+					TokenID:     "foo",
+					TokenSecret: "bar",
+				},
+			},
+			expected: "foo.bar",
+			reason:   "encoded",
+		},
+	}
+
+	for _, c := range cases {
+		actual := GetTLSBootstrapTokenForKubeConfig(c.profile)
+		if actual != c.expected {
+			t.Errorf("%s: expect=%s actual=%s", c.reason, c.expected, actual)
 		}
 	}
 }
