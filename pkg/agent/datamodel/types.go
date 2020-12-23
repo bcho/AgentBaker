@@ -585,6 +585,13 @@ type SysctlConfig struct {
 	VMVfsCachePressure             *int32 `json:"vmVfsCachePressure,omitempty"`
 }
 
+// TLSBootstrapToken defines the agent pool TLS bootstrap token.
+// ref: https://kubernetes.io/docs/reference/access-authn-authz/bootstrap-tokens/#token-format
+type TLSBootstrapToken struct {
+	TokenID     string `json:"tokenId"`
+	TokenSecret string `json:"tokenSecret"`
+}
+
 // AgentPoolProfile represents an agent pool definition
 type AgentPoolProfile struct {
 	Name                                string               `json:"name"`
@@ -636,6 +643,7 @@ type AgentPoolProfile struct {
 	ProximityPlacementGroupID           string               `json:"proximityPlacementGroupID,omitempty"`
 	CustomKubeletConfig                 *CustomKubeletConfig `json:"customKubeletConfig,omitempty"`
 	CustomLinuxOSConfig                 *CustomLinuxOSConfig `json:"customLinuxOSConfig,omitempty"`
+	TLSBootstrapToken                   *TLSBootstrapToken   `json:"tlsBootstrapToken,omitempty"`
 }
 
 // Properties represents the AKS cluster definition
