@@ -239,6 +239,7 @@ func (gc *generateCmd) run(cloudSpecConfig *datamodel.AzureEnvironmentSpecConfig
 		ConfigGPUDriverIfNeeded:       true,
 		EnableGPUDevicePluginIfNeeded: false,
 		EnableKubeletConfigFile:       false,
+		EnableTLSBootstrapToken:       true,
 		K8sComponents: &datamodel.K8sComponents{
 			PodInfraContainerImageURL: "mcr.microsoft.com/oss/kubernetes/pause:1.3.1",
 			HyperkubeImageURL:         "mcr.microsoft.com/hyperkube-amd64:v1.16.13",
