@@ -8,11 +8,12 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/Azure/agentbaker/pkg/agent/datamodel"
 	"github.com/Azure/go-autorest/autorest/to"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
+
+	"github.com/Azure/agentbaker/pkg/agent/datamodel"
 )
 
 func generateTestData() bool {
@@ -281,6 +282,14 @@ var _ = Describe("Assert generated customData and cseCmd", func() {
 				TransparentHugePageEnabled: "never",
 				TransparentHugePageDefrag:  "defer+madvise",
 				SwapFileSizeMB:             &swapFileSizeMB,
+			}
+		}),
+
+		Entry("AKSUbuntu1804 with TLS bootstrap token", "AKSUbuntu1804+TLSBootstrapToken", "1.18.3", func(config *datamodel.NodeBootstrappingConfiguration) {
+			config.EnableTLSBootstrapToken = true
+			config.ContainerService.Properties.AgentPoolProfiles[0].TLSBootstrapToken = &datamodel.TLSBootstrapToken{
+				TokenID:     "07401b",
+				TokenSecret: "f395accd246ae52d",
 			}
 		}))
 

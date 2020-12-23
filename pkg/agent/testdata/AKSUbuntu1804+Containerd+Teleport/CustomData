@@ -225,6 +225,7 @@ write_files:
 
 
 
+
 - path: /var/lib/kubelet/kubeconfig
   permissions: "0644"
   owner: root
@@ -248,6 +249,7 @@ write_files:
       name: localclustercontext
     current-context: localclustercontext
     #EOF
+
 
 - path: /etc/default/kubelet
   permissions: "0644"
